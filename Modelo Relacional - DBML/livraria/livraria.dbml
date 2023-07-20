@@ -1,0 +1,33 @@
+Table Livro {
+    isbn integer [pk, not null, increment]
+    autor varchar(255)
+    quantidade integer
+    assunto varchar(255)
+    codigo_editora integer
+}
+
+Table Editora {
+    codigo integer [pk, not null, increment]
+    nome_gerente varchar(255)
+    telefone varchar(255)
+    endereco varchar(255)
+}
+
+Ref: Livro.codigo_editora > Editora.codigo
+
+Table Cliente {
+    ident integer [pk, not null, increment]
+    endereco varchar(255)
+    telefone varchar(255)
+    ftipo boolean
+    cpf varchar [unique]
+    cnpj varchar [unique]
+}
+
+Table Compra {
+    isbn integer [not null, ref: > Livro.isbn]
+    ident integer [not null, ref: > Cliente.ident]
+    quantidade integer
+    data_compra timestamp [default: `now()`]
+}
+
